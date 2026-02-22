@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>100 приветствий из ниоткуда</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .hello {
+            position: absolute;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            opacity: 0;
+            animation: appear 2s forwards;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        const container = document.getElementById('container');
+        const totalCount = 100;
+        const delay = 150; // миллисекунды между появлениями
+
+        for (let i = 0; i < totalCount; i++) {
+            setTimeout(() => {
+                // Создаём элемент
+                const word = document.createElement('div');
+                word.className = 'hello';
+                word.textContent = 'Привет';
+
+                // Случайные координаты на экране
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+
+                // Устанавливаем позицию
+                word.style.left = `${x}px`;
+                word.style.top = `${y}px`;
+
+                // Добавляем в контейнер
+                container.appendChild(word);
+
+                // Удаляем элемент через 3 секунды, чтобы не перегружать страницу
+                setTimeout(() => {
+                    word.remove();
+                }, 3000);
+
+            }, i * delay);
+        }
+    </script>
+</body>
+</html>
